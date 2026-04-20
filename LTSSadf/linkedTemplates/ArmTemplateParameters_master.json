@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "LTSSadf"
+		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
+		"ls_adf_gen1_accountKey": {
+			"value": ""
+		},
+		"ls_sql_utildb_password": {
+			"value": ""
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "0420-100835-h9llbjq3"
+		},
+		"ls_adf_gen1_properties_typeProperties_url": {
+			"value": "https://learningsan.dfs.core.windows.net/"
+		},
+		"ls_sql_utildb_properties_typeProperties_server": {
+			"value": "sqlserverutil.database.windows.net"
+		},
+		"ls_sql_utildb_properties_typeProperties_database": {
+			"value": "UTIL"
+		},
+		"ls_sql_utildb_properties_typeProperties_userName": {
+			"value": "pallavinallamothu"
+		},
+		"LTSS1trigger_properties_LTSS2_parameters_P2": {
+			"value": 5
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
