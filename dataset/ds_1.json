@@ -1,0 +1,25 @@
+{
+	"name": "ds_1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adf_gen1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Test_cp.txt",
+				"folderPath": "01",
+				"fileSystem": "learncont"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

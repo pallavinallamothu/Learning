@@ -1,0 +1,44 @@
+{
+	"name": "LTSS1",
+	"properties": {
+		"activities": [
+			{
+				"name": "learn1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 5
+				}
+			},
+			{
+				"name": "learn2",
+				"type": "Wait",
+				"dependsOn": [
+					{
+						"activity": "learn1",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": {
+						"value": "@pipeline().parameters.p1",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"p1": {
+				"type": "int",
+				"defaultValue": 2
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-04-07T07:03:04Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

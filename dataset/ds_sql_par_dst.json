@@ -1,0 +1,31 @@
+{
+	"name": "ds_sql_par_dst",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_utildb",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"scnm_dst": {
+				"type": "string"
+			},
+			"tbnm_dst": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().scnm_dst",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().tbnm_dst",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

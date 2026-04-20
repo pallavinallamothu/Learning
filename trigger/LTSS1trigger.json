@@ -1,0 +1,33 @@
+{
+	"name": "LTSS1trigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "LTSS1",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "LTSS2",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"P2": 5
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2026-04-07T07:12:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

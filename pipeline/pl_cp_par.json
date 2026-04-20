@@ -1,0 +1,92 @@
+{
+	"name": "pl_cp_par",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_sql_par_src",
+						"type": "DatasetReference",
+						"parameters": {
+							"scnm": {
+								"value": "@pipeline().parameters.scnm",
+								"type": "Expression"
+							},
+							"tblnm": {
+								"value": "@pipeline().parameters.tbnm",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_sql_par_dst",
+						"type": "DatasetReference",
+						"parameters": {
+							"scnm_dst": {
+								"value": "@pipeline().parameters.scnm_dst",
+								"type": "Expression"
+							},
+							"tbnm_dst": {
+								"value": "@pipeline().parameters.tbnm_dst",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"scnm": {
+				"type": "string"
+			},
+			"tbnm": {
+				"type": "string"
+			},
+			"scnm_dst": {
+				"type": "string"
+			},
+			"tbnm_dst": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-04-17T06:31:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

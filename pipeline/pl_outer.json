@@ -1,0 +1,105 @@
+{
+	"name": "pl_outer",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://management.azure.com/subscriptions/193805c4-3208-46cb-898f-60f4bfa58879/resourceGroups/Trail/providers/Microsoft.DataFactory/factories/secondLTSSadf/pipelines/pl_Inner/createRun?api-version=2018-06-01",
+					"authentication": {
+						"type": "ServicePrincipal",
+						"userTenant": "f0e90c69-f2a2-4211-b395-97b83c342971",
+						"username": "2bdac156-a7ce-45b6-9013-be225a9618b2",
+						"resource": "https://management.azure.com",
+						"password": {
+							"type": "SecureString",
+							"value": "**********"
+						}
+					}
+				}
+			},
+			{
+				"name": "Until1",
+				"type": "Until",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@or(equals(activity('Web2').output.status,'Succeeded'), or(equals(activity('Web2').output.status,'Failed'), equals(activity('Web2').output.status,'Cancelled')))",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Web2",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"method": "GET",
+								"url": {
+									"value": "@concat('https://management.azure.com/subscriptions/193805c4-3208-46cb-898f-60f4bfa58879/resourceGroups/Trail/providers/Microsoft.DataFactory/factories/secondLTSSadf/pipelineruns/',activity('Web1').output.runid,'?api-version=2018-06-01')",
+									"type": "Expression"
+								},
+								"authentication": {
+									"type": "ServicePrincipal",
+									"userTenant": "f0e90c69-f2a2-4211-b395-97b83c342971",
+									"username": "2bdac156-a7ce-45b6-9013-be225a9618b2",
+									"resource": "https://management.azure.com",
+									"password": {
+										"type": "SecureString",
+										"value": "**********"
+									}
+								}
+							}
+						},
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [
+								{
+									"activity": "Web2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 10
+							}
+						}
+					],
+					"timeout": "0.12:00:00"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-04-19T07:30:54Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
